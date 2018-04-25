@@ -1,0 +1,39 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.sun.honor.wechat.context.WechatMpProperties",
+      "name": "wechat.mp",
+      "type": "com.sun.honor.wechat.context.WechatMpProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.sun.honor.wechat.context.WechatMpProperties",
+      "name": "wechat.mp.access-authorize-path",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sun.honor.wechat.context.WechatMpProperties",
+      "name": "wechat.mp.app-id",
+      "description": "公众号的唯一标识",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sun.honor.wechat.context.WechatMpProperties",
+      "name": "wechat.mp.app-secret",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sun.honor.wechat.context.WechatMpProperties",
+      "name": "wechat.mp.authorize-code-path",
+      "description": "授权后重定向的回调链接path",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sun.honor.wechat.context.WechatMpProperties",
+      "name": "wechat.mp.notify-address",
+      "type": "java.lang.String"
+    }
+  ]
+}
