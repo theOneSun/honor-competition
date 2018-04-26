@@ -37,4 +37,8 @@ public class WechatMpProperties {
      * 微信oauth授权获取token的url
      */
     private String requestAccessTokenUrl;
+    /**
+     * 微信请求用户信息的url
+     */
+    private String requestUserInfoUrl;
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.honor.dao.mapper.WechatUserMapper">
+
+
+    <insert id="save">
+        INSERT INTO user_wechat (id, union_id, open_id, access_token, expires_in, refresh_token, create_time, nick_name, sex, province, city, country, head_img_url, privilege)
+        VALUES
+            (#{id}, #{unionId}, #{openId}, #{accessToken},
+             #{expiresIn}, #{refreshToken}, #{createTime},#{nickName},
+             #{sex}, #{province}, #{city},#{country},
+             #{headImgUrl}, #{privilege});
+    </insert>
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.honor.dao.mapper.ApplyPlayerMapper">
+
+
+    <insert id="save">
+        INSERT INTO apply_player (id, name,open_id, apply_time, apply_time_milli, match_id)
+        VALUES (#{id}, #{name},#{openId}, #{applyTime}, #{applyTimeMilli}, #{matchId});
+    </insert>
+    <select id="listPlayerByMatchId" resultType="com.sun.honor.business.ApplyPlayer">
+        SELECT * FROM apply_player WHERE match_id = #{matchId} GROUP BY open_id ORDER BY apply_time_milli LIMIT #{maxPlayer};
+    </select>
+</mapper>

@@ -1,16 +1,16 @@
 package com.sun.honor.wechat.controller;
 
+import com.sun.honor.wechat.AccessTokenResponse;
+import com.sun.honor.wechat.UserInfoResponse;
 import com.sun.honor.wechat.context.WechatMpClient;
+import com.sun.honor.wechat.context.WechatMpUserInfoSuccessEvent;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 /**
  * @author sunjian.
@@ -19,18 +19,33 @@ import java.net.URLEncoder;
 public class WechatLoginController {
 
     private WechatMpClient wechatMpClient;
+    private final ApplicationEventPublisher publisher;
+
+    public WechatLoginController(WechatMpClient wechatMpClient, ApplicationEventPublisher publisher) {
+        this.wechatMpClient = wechatMpClient;
+        this.publisher = publisher;
+    }
 
     //用户发起的登录接口
-    public void wechatLogin() throws IOException {
-        wechatMpClient.requestCode();
+    @RequestMapping("/wechat/apply")
+    public void wechatLogin(HttpServletResponse response) throws IOException {
+        String url = wechatMpClient.requestCode();
+        response.sendRedirect(url);
     }
 
     //微信回调
-    @RequestMapping("/wechat/code")
-    public void printCode(@RequestParam("code") String code,
-                          @RequestParam(value = "redirect",required = false) String redirect) {
-        System.out.println("返回的code是: " + code);
-        System.out.println("返回的redirect是: " + redirect);
+    @RequestMapping("/wechat/token")
+    public void printCode(@RequestParam("code") String code) throws IOException {
+//        System.out.println("返回的code是: " + code);
+//        System.out.println("返回的redirect是: " + redirect);
+        AccessTokenResponse accessTokenResponse = wechatMpClient.requestAccessToken(code);
+        //判断用户是否存在,不存在需要保存用户
+//        String openId = accessTokenResponse.getOpenId();
+        //获取用户信息
+        UserInfoResponse userInfoResponse = wechatMpClient.getUserInfo(accessTokenResponse);
+        WechatMpUserInfoSuccessEvent successEvent = new WechatMpUserInfoSuccessEvent(this,userInfoResponse);
+        //发布事件
+        publisher.publishEvent(successEvent);
     }
 
 

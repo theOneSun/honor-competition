@@ -5,8 +5,8 @@ package com.sun.honor.wechat.context;
  * Created by sj on 2018/4/25.
  */
 public enum WechatAuthorityScope {
-    BASE("base"),
-    USER_INFO("userinfo"),;
+    BASE("snsapi_base"),
+    USER_INFO("snsapi_userinfo"),;
     private String scope;
 
     WechatAuthorityScope(String scope) {
