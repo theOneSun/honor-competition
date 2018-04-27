@@ -8,4 +8,6 @@ import com.sun.honor.wechat.UserInfoResponse;
  */
 public interface ApplyService {
     void enterFor(UserInfoResponse userInfoResponse);
+
+    boolean applyForMatch(String matchId);
 }

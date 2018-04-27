@@ -27,7 +27,7 @@ public class WechatLoginController {
     }
 
     //用户发起的登录接口
-    @RequestMapping("/wechat/apply")
+    @RequestMapping("/wechat/login")
     public void wechatLogin(HttpServletResponse response) throws IOException {
         String url = wechatMpClient.requestCode();
         response.sendRedirect(url);

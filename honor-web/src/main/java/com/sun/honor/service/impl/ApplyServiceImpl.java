@@ -41,10 +41,19 @@ public class ApplyServiceImpl implements ApplyService {
         applyPlayerMapper.save(applyPlayer);
     }
 
+    @Override
+    public boolean applyForMatch(String matchId) {
+        /*
+         * 获取用户信息
+         */
+        return false;
+    }
+
     //事件监听
     @EventListener
     public void handleUserInfoEvent(WechatMpUserInfoSuccessEvent successEvent){
         UserInfoResponse userInfoResponse = successEvent.getUserInfoResponse();
         enterFor(userInfoResponse);
+        // TODO: 2018/4/27 用户登录操作
     }
 }
