@@ -26,7 +26,7 @@ public class WechatMpClient {
     private WechatMpProperties wechatMpProperties;
     private OkHttpClient okHttpClient = new OkHttpClient();
 
-    public WechatMpClient(WechatMpProperties wechatMpProperties){
+    public WechatMpClient(WechatMpProperties wechatMpProperties) {
         this.wechatMpProperties = wechatMpProperties;
     }
 
@@ -54,18 +54,30 @@ public class WechatMpClient {
         Request request = new Request.Builder().url(url).build();
         Response response = okHttpClient.newCall(request).execute();
         System.out.println(response.code());
-        if (response.isSuccessful()){
+        if (response.isSuccessful()) {
             ResponseBody body = response.body();
             return JSON.parseObject(body.string(), new TypeReference<AccessTokenResponse>() {});
-        }else {
+        }
+        else {
             System.out.println(response);
             return null;
         }
     }
 
     //todo 刷新accessToken
-    public AccessTokenResponse refreshAccessToken() {
-        return null;
+    public AccessTokenResponse refreshAccessToken(String refreshToken) throws IOException {
+        String url = wechatMpProperties.getRefreshTokenUrl()
+                + "?appid=" + wechatMpProperties.getAppId()
+                + "&grant_type=refresh_token&refresh_token=" + refreshToken;
+        Request request = new Request.Builder().url(url).build();
+        Response response = okHttpClient.newCall(request).execute();
+        if (response.isSuccessful()) {
+            ResponseBody body = response.body();
+            return JSON.parseObject(body.string(), new TypeReference<AccessTokenResponse>() {});
+        }
+        else {
+            return null;
+        }
     }
 
     //todo
@@ -76,10 +88,11 @@ public class WechatMpClient {
                 + "&lang=zh_CN";
         Request request = new Request.Builder().url(url).build();
         Response response = okHttpClient.newCall(request).execute();
-        if (response.isSuccessful()){
+        if (response.isSuccessful()) {
             ResponseBody body = response.body();
             return JSON.parseObject(body.string(), new TypeReference<UserInfoResponse>() {});
-        }else {
+        }
+        else {
             return null;
         }
     }

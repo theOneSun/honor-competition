@@ -38,6 +38,10 @@ public class WechatMpProperties {
      */
     private String requestAccessTokenUrl;
     /**
+     * 刷新用户token的url
+     */
+    private String refreshTokenUrl;
+    /**
      * 微信请求用户信息的url
      */
     private String requestUserInfoUrl;

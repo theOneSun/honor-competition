@@ -37,7 +37,6 @@ public class WechatLoginController {
     @RequestMapping("/wechat/token")
     public void printCode(@RequestParam("code") String code) throws IOException {
 //        System.out.println("返回的code是: " + code);
-//        System.out.println("返回的redirect是: " + redirect);
         AccessTokenResponse accessTokenResponse = wechatMpClient.requestAccessToken(code);
         //判断用户是否存在,不存在需要保存用户
 //        String openId = accessTokenResponse.getOpenId();
