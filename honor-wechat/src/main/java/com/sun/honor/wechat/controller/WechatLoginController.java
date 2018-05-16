@@ -57,7 +57,7 @@ public class WechatLoginController {
         //发布事件
         publisher.publishEvent(successEvent);
 //        requestCache.getRequest(request,response);
-        SavedRequest savedRequest = (SavedRequest) RequestContextHolder.currentRequestAttributes()
+        SavedRequest savedRequest = (SavedRequest) RequestContextHolder.getRequestAttributes()
                                                                        .getAttribute("SPRING_SECURITY_SAVED_REQUEST", RequestAttributes.SCOPE_SESSION);
         logger.info("SPRING_SECURITY_SAVED_REQUEST",savedRequest);
         response.sendRedirect(savedRequest.getRedirectUrl());
