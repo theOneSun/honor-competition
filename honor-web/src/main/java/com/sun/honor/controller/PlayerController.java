@@ -4,10 +4,15 @@ import com.sun.honor.service.ApplyService;
 import com.sun.honor.service.PlayerService;
 import com.sun.honor.service.RedisService;
 import com.sun.honor.util.NumberUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+
 
 /**
  * @author sunjian.
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/competition")
 public class PlayerController {
 
+    Logger logger = LoggerFactory.getLogger(PlayerController.class);
     private final RedisService redisService;
     private final PlayerService playerService;
     @Autowired
@@ -39,7 +45,10 @@ public class PlayerController {
     }
 
     @RequestMapping("/apply")
-    public boolean applyForMatch(@RequestParam("matchId") String matchId){
+    public boolean applyForMatch(@RequestParam("matchId") String matchId) {
+        String openId = (String) RequestContextHolder.getRequestAttributes()
+                                                     .getAttribute(LoginController.OPEN_ID, RequestAttributes.SCOPE_SESSION);
+        logger.info("当前登录用户的openId是:   " + openId);
         return applyService.applyForMatch(matchId);
     }
 }

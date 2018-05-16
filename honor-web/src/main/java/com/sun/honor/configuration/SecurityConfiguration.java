@@ -14,19 +14,25 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // 密码加密
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
             .disable()//禁用csrf保护
+            .authorizeRequests()
+            .antMatchers("/public/**", "/wechat/**")
+            .permitAll()
+            .anyRequest()
+            .authenticated()
+            .and()
             .formLogin()
             .loginPage("/wechat/login")
             .and()
-            .authorizeRequests()
-            .antMatchers("/public/**","/wechat/**")
-            .permitAll()
+
+
         ;
     }
 }

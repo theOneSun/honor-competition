@@ -50,10 +50,10 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     //事件监听
-    @EventListener
-    public void handleUserInfoEvent(WechatMpUserInfoSuccessEvent successEvent){
-        UserInfoResponse userInfoResponse = successEvent.getUserInfoResponse();
-        enterFor(userInfoResponse);
-        // TODO: 2018/4/27 用户登录操作
-    }
+//    @EventListener
+//    public void handleUserInfoEvent(WechatMpUserInfoSuccessEvent successEvent){
+//        UserInfoResponse userInfoResponse = successEvent.getUserInfoResponse();
+//        enterFor(userInfoResponse);
+//        // TODO: 2018/4/27 用户登录操作
+//    }
 }
