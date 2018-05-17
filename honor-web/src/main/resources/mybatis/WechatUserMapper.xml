@@ -7,8 +7,14 @@
         INSERT INTO user_wechat (id, union_id, open_id, access_token, expires_in, refresh_token, create_time, nick_name, sex, province, city, country, head_img_url, privilege)
         VALUES
             (#{id}, #{unionId}, #{openId}, #{accessToken},
-             #{expiresIn}, #{refreshToken}, #{createTime},#{nickName},
+             #{expiresIn}, #{refreshToken}, now(),#{nickName},
              #{sex}, #{province}, #{city},#{country},
              #{headImgUrl}, #{privilege});
     </insert>
+    <update id="update">
+        UPDATE user_wechat
+        SET union_id  = #{unionId}, access_token = #{accessToken}, expires_in = #{expiresIn}, last_login_time = #{lastLoginTime}, refresh_token = #{refreshToken},
+            create_time = #{createTime}, nick_name = #{nickName}, sex = #{sex}, province = #{province}, city = #{city}, country = #{country}, head_img_url = #{headImgUrl}, privilege = #{privilege}
+        WHERE open_id = #{openId};
+    </update>
 </mapper>

@@ -34,7 +34,7 @@ public class UserInfoResponse extends BaseWechatMpResponse {
     @JsonProperty("headimgurl")
     private String headImgUrl;
 
-    @JsonProperty("country")
+    @JsonProperty("privilege")
     private String privilege;
 
     @JsonProperty("unionid")

@@ -20,7 +20,8 @@ public class WechatUser {
     private String unionId;
     private String openId;
     private String accessToken;
-    private String expiresIn;
+    private LocalDateTime lastLoginTime;
+    private Integer expiresIn;
     private String refreshToken;
     private LocalDateTime createTime;
     private String nickName;
@@ -38,5 +39,5 @@ public class WechatUser {
     /**
      * 用户特权信息，json数组，如微信沃卡用户为（chinaunicom）
      */
-    private List privilege;
+    private String privilege;
 }

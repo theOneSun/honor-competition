@@ -1,5 +1,6 @@
 package com.sun.honor.controller;
 
+import com.sun.honor.context.SessionKey;
 import com.sun.honor.service.ApplyService;
 import com.sun.honor.service.PlayerService;
 import com.sun.honor.service.RedisService;
@@ -47,7 +48,7 @@ public class PlayerController {
     @RequestMapping("/apply")
     public boolean applyForMatch(@RequestParam("matchId") String matchId) {
         String openId = (String) RequestContextHolder.getRequestAttributes()
-                                                     .getAttribute(LoginController.OPEN_ID, RequestAttributes.SCOPE_SESSION);
+                                                     .getAttribute(SessionKey.OPENID, RequestAttributes.SCOPE_SESSION);
         logger.info("当前登录用户的openId是:   " + openId);
         return applyService.applyForMatch(matchId);
     }
